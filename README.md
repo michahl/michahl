@@ -1,3 +1,5 @@
+![views](https://komarev.com/ghpvc/?username=michahl&color=lightgrey)
+
 # michahl <img src="https://cdn.discordapp.com/emojis/1065770525655310408.gif" width="25" />
 
 #### I'm currently learning a few skills/libraries such as:
