@@ -1,9 +1,20 @@
-```
-{
+```javascript
+class SoftwareEngineer {
+    constructor() {
+        this.name = "michahl"
+        this.role = "Software Engineer"
+        this.languageSpoken = ["el_GR", "en_US"]
+    }
 
+    sayHi() {
+        console.log("thanks for dropping by.")
+    }
 }
-```
 
+const me = new SoftwareEngineer()
+me.sayHi()
+```
+📊 **weekly stats:**
 <!--START_SECTION:stats-->
 
 <!--END_SECTION:stats-->
