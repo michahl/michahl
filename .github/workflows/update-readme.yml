@@ -17,31 +17,30 @@ jobs:
         with:
           node-version: '14'
 
+      - name: Install GitHub Linguist
+        run: |
+          gem install github-linguist
+
       - name: Calculate language statistics
         run: |
-          npm install -g github-linguist
-          github-linguist > stats.json
+          github-linguist --json > stats.json
           cat stats.json
 
       - name: Update README.md
         run: |
           # Parse the JSON and extract the necessary information
-          LANG_STATS=$(cat stats.json | jq -r 'to_entries | map("\(.key)\t\(.value)") | .[]')
+          LANG_STATS=$(jq -r '.languages | to_entries | map("\(.key) \(.value.percent|tostring) %") | .[]' stats.json)
           
           # Prepare the updated content for README.md
-          README_CONTENT=$(cat <<EOF
-# Project Name
-
-## Language Statistics
-
+          LANG_STATS_CONTENT=$(cat <<EOF
 \`\`\`
 ${LANG_STATS}
 \`\`\`
 EOF
           )
           
-          # Update README.md
-          echo "${README_CONTENT}" > README.md
+          # Update the README.md file
+          sed -i '/<!--START_SECTION:language-stats-->/, /<!--END_SECTION:language-stats-->/c\<!--START_SECTION:language-stats-->\n${LANG_STATS_CONTENT}\n<!--END_SECTION:language-stats-->' README.md
 
       - name: Commit and push changes
         run: |
