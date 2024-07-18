@@ -7,7 +7,7 @@ class SoftwareEngineer {
     }
 
     sayHi() {
-        console.log("thanks for dropping by.")
+        console.log("thanks for stopping by")
     }
 }
 
