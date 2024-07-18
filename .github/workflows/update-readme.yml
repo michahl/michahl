@@ -1,0 +1,52 @@
+name: Update README
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs every day at midnight
+  workflow_dispatch:  # Allows manual triggering of the workflow
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Calculate language statistics
+        run: |
+          npm install -g github-linguist
+          github-linguist > stats.json
+          cat stats.json
+
+      - name: Update README.md
+        run: |
+          # Parse the JSON and extract the necessary information
+          LANG_STATS=$(cat stats.json | jq -r 'to_entries | map("\(.key)\t\(.value)") | .[]')
+          
+          # Prepare the updated content for README.md
+          README_CONTENT=$(cat <<EOF
+# Project Name
+
+## Language Statistics
+
+\`\`\`
+${LANG_STATS}
+\`\`\`
+EOF
+          )
+          
+          # Update README.md
+          echo "${README_CONTENT}" > README.md
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add README.md
+          git commit -m 'Update README with language statistics'
+          git push
