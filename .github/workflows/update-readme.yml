@@ -1,9 +1,11 @@
-name: Update README
+name: Update README Weekly
 
 on:
+  push:
+    branches:
+      - main  # Adjust the branch name if needed
   schedule:
-    - cron: '0 0 * * *'  # Runs every day at midnight
-  workflow_dispatch:  # Allows manual triggering of the workflow
+    - cron: '0 0 * * 0'  # Runs every Sunday at midnight
 
 jobs:
   update-readme:
@@ -28,19 +30,14 @@ jobs:
 
       - name: Update README.md
         run: |
-          # Parse the JSON and extract the necessary information
-          LANG_STATS=$(jq -r '.languages | to_entries | map("\(.key) \(.value.percent|tostring) %") | .[]' stats.json)
-          
-          # Prepare the updated content for README.md
+          LANG_STATS=$(jq -r '.languages | to_entries | map("\(.key) \(.value.percent|tostring) %") | .[]')
           LANG_STATS_CONTENT=$(cat <<EOF
 \`\`\`
 ${LANG_STATS}
 \`\`\`
 EOF
           )
-          
-          # Update the README.md file
-          sed -i '/<!--START_SECTION:language-stats-->/, /<!--END_SECTION:language-stats-->/c\<!--START_SECTION:language-stats-->\n${LANG_STATS_CONTENT}\n<!--END_SECTION:language-stats-->' README.md
+          sed -i '/<!--START_SECTION:stats-->/, /<!--END_SECTION:stats-->/c\<!--START_SECTION:stats-->\n${LANG_STATS_CONTENT}\n<!--END_SECTION:stats-->' README.md
 
       - name: Commit and push changes
         run: |
