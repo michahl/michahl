@@ -14,9 +14,9 @@ class SoftwareEngineer {
 const me = new SoftwareEngineer()
 me.sayHi()
 ```
+
 📊 **weekly stats:**
 <!--START_SECTION:stats-->
-
 <!--END_SECTION:stats-->
 
 <div align="center">
