@@ -15,8 +15,8 @@ const me = new SoftwareEngineer()
 me.sayHi()
 ```
 
-<!--START_SECTION:stats-->
-<!--END_SECTION:stats-->
+<!--START_SECTION:waka-->
+<!--END_SECTION:waka-->
 
 <div align="center">
   <img src="https://img.shields.io/github/last-commit/michahl/michahl" alt="ls"/>
