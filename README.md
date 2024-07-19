@@ -1,3 +1,10 @@
+<div align="center">
+    <a href="https://michahl.com">@</a>
+    <a>/</a>
+    <a href="https://blog.michahl.com">blog</a>
+    <p></p>
+</div>
+
 ```javascript
 class SoftwareEngineer {
     constructor() {
