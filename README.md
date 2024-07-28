@@ -11,21 +11,6 @@ class SoftwareEngineer {
         this.name = 'michahl'
         this.role = 'Software Engineer'
         this.languageSpoken = ['el_GR', 'en_US'],
-        this.tools = ['VSCode', 'Postman', 'Git'],
-        this.technologies = {
-            nextjs: true,
-            typescript: true,
-            frontend: {
-                tsx: 'React',
-                tools: ['Tailwind']
-            },
-            backend: {
-                ts: ['Node', 'Express']
-            },
-            databases: ['MongoDB', 'SQL']
-        },
-        this.others = ['C', 'Python'],
-        this.learning = ['Swift', ...others]
     }
 
     sayHi() {
